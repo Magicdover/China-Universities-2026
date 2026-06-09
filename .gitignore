@@ -14,3 +14,5 @@ node_modules/
 # 日志 / 临时
 *.log
 tmp/
+
+.vercel
