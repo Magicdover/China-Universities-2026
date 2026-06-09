@@ -1,0 +1,14 @@
+# 图片资源按二进制处理，避免行尾（CRLF/LF）转换与无意义 diff
+*.png binary
+*.svg binary
+*.ico binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+
+# 源码统一按文本处理（git 自动检测行尾）
+*.js   text
+*.css  text
+*.html text
+*.md   text
+*.json text

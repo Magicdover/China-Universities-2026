@@ -1,0 +1,16 @@
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# 依赖（本项目为纯静态，通常无需）
+node_modules/
+
+# Vercel
+.vercel
+
+# 日志 / 临时
+*.log
+tmp/

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>中国高校全景 · 2026 | 院校分布地图与多维分类</title>
+  <meta name="description" content="中国重点高校（双一流 / 985 / 211 / 清北 / 华五 / C9 / 军工 / 政法 / 财经）全景地图与多维分类，含创立时间、所在地、优势学科、就业与 2025 重庆参考分数。" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ============ 顶部导航 ============ -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">
+        <img class="brand-mark" src="assets/moe.png" alt="教育部徽标" />
+        <span class="brand-text">
+          <strong>中国高校全景</strong>
+          <em>2026 · 院校分布与多维分类</em>
+        </span>
+      </a>
+      <nav class="top-nav">
+        <a href="#map-section">分布地图</a>
+        <a href="#explore">分类浏览</a>
+        <a href="#apply">志愿填报</a>
+        <a href="#about">数据说明</a>
+      </nav>
+      <div class="header-search">
+        <input id="globalSearch" type="search" placeholder="搜索院校 / 城市 / 学科…" autocomplete="off" />
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 主视觉 ============ -->
+  <section class="hero">
+    <img class="hero-flag" src="assets/flag.svg" alt="" aria-hidden="true" />
+    <div class="wrap">
+      <p class="hero-kicker">2026 年 6 月 · 高考季</p>
+      <h1 class="hero-title">在一张地图上，读懂中国的好大学</h1>
+      <p class="hero-sub">汇集清北、华五、C9、985、211、双一流，以及军工、政法、财经、师范、医学等特色名校——创立时间、所在地、优势学科、就业去向与「2025 重庆参考分数」，按你关心的维度一目了然。</p>
+      <div class="hero-stats" id="heroStats"><!-- JS 注入 --></div>
+      <div class="hero-chips" id="quickChips"><!-- JS 注入：层次快捷筛选 --></div>
+    </div>
+  </section>
+
+  <!-- ============ 分布地图 ============ -->
+  <section class="section" id="map-section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>全国分布地图</h2>
+        <p class="section-desc">气泡位置为院校所在城市，颜色代表层次、大小代表综合层级；点击气泡即可查看详情。可切换为「各省院校数量」热力视图。</p>
+      </div>
+      <div class="map-toolbar">
+        <div class="seg" id="mapModeSeg" role="tablist" aria-label="地图模式">
+          <button class="seg-btn is-active" data-mode="bubble" type="button">院校气泡</button>
+          <button class="seg-btn" data-mode="heat" type="button">各省数量</button>
+        </div>
+        <label class="map-link" title="关闭后，点击分类筛选不再改动地图"><input type="checkbox" id="mapLinkToggle" checked /><span>随筛选联动</span></label>
+        <div class="map-legend" id="mapLegend"><!-- JS 注入 --></div>
+      </div>
+      <div class="map-stage">
+        <div id="map" class="map-canvas" role="img" aria-label="中国高校分布地图"></div>
+        <button class="map-reset" id="mapReset" type="button" hidden>↩ 返回全国</button>
+        <div class="map-hint" id="mapHint">提示：滚轮缩放、拖拽平移；点击气泡查看院校详情。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 分类浏览 ============ -->
+  <section class="section section-explore" id="explore">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>多维分类浏览</h2>
+        <p class="section-desc">按「层次、类型、特色院校群、地区」任意组合筛选；筛选结果与上方地图实时联动。</p>
+      </div>
+
+      <div class="explore-layout">
+        <!-- 侧栏筛选 -->
+        <aside class="filters" id="filters">
+          <div class="filters-head">
+            <span>筛选维度</span>
+            <button id="resetFilters" class="link-btn" type="button">重置</button>
+          </div>
+          <div id="filterGroups"><!-- JS 注入各维度 --></div>
+        </aside>
+
+        <!-- 结果区 -->
+        <div class="results">
+          <div class="results-bar">
+            <div class="results-count" id="resultsCount">—</div>
+            <div class="results-sort">
+              <label for="sortSelect">排序</label>
+              <select id="sortSelect">
+                <option value="tier">综合层级（默认）</option>
+                <option value="scoreWl">2025 物理类分数 高→低</option>
+                <option value="scoreLs">2025 历史类分数 高→低</option>
+                <option value="founded">创立时间 早→晚</option>
+                <option value="name">校名拼音</option>
+              </select>
+            </div>
+          </div>
+          <div class="active-tags" id="activeTags"><!-- JS 注入已选标签 --></div>
+          <div class="card-grid" id="cardGrid"><!-- JS 注入院校卡片 --></div>
+          <div class="empty-state" id="emptyState" hidden>没有符合条件的院校，试着放宽筛选条件。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 志愿填报辅助 ============ -->
+  <section class="section section-apply" id="apply">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>志愿填报辅助 · 冲稳保</h2>
+        <p class="section-desc">选择科类，输入你的「位次」（推荐，跨年更稳定）或「分数」，系统按「冲 / 稳 / 保」三档给出可参考的院校。基于 2025 重庆参考数据测算，仅供大致定位，不构成填报建议。</p>
+      </div>
+      <div class="apply-form">
+        <div class="seg" id="applyKind" role="tablist" aria-label="科类">
+          <button class="seg-btn is-active" data-kind="wl" type="button">物理类</button>
+          <button class="seg-btn" data-kind="ls" type="button">历史类</button>
+        </div>
+        <label class="apply-field">位次<input id="applyRank" type="number" min="1" inputmode="numeric" placeholder="如 8000" /></label>
+        <span class="apply-or">或</span>
+        <label class="apply-field">分数<input id="applyScore" type="number" min="0" max="750" inputmode="numeric" placeholder="如 620" /></label>
+        <button class="btn-primary" id="applyBtn" type="button">查询院校</button>
+        <button class="link-btn" id="applyClear" type="button">清空</button>
+      </div>
+      <div class="apply-tip" id="applyTip">提示：位次比分数更能反映真实竞争力，建议优先填位次；两者都填则以位次为准。</div>
+      <div class="apply-results" id="applyResults" hidden>
+        <div class="apply-col" data-band="chong">
+          <h3><i></i>冲 <em>稍高于你，值得冲刺</em><span class="apply-cnt"></span></h3>
+          <div class="apply-list"></div>
+        </div>
+        <div class="apply-col" data-band="wen">
+          <h3><i></i>稳 <em>与你水平相当</em><span class="apply-cnt"></span></h3>
+          <div class="apply-list"></div>
+        </div>
+        <div class="apply-col" data-band="bao">
+          <h3><i></i>保 <em>较有把握的保底</em><span class="apply-cnt"></span></h3>
+          <div class="apply-list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 数据说明 ============ -->
+  <section class="section section-about" id="about">
+    <div class="wrap">
+      <div class="section-head"><h2>数据说明与口径</h2></div>
+      <div class="about-grid" id="aboutGrid"><!-- JS 注入 --></div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p id="footerNote"></p>
+      <p class="footer-meta">本页为信息整理与可视化作品，非官方招生材料；志愿填报请以教育部、各高校及重庆市教育考试院公布的权威数据为准。</p>
+    </div>
+  </footer>
+
+  <!-- ============ 院校详情抽屉 ============ -->
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <aside class="drawer" id="drawer" hidden aria-hidden="true" aria-label="院校详情">
+    <button class="drawer-close" id="drawerClose" type="button" aria-label="关闭">×</button>
+    <div class="drawer-body" id="drawerBody"><!-- JS 注入 --></div>
+  </aside>
+
+  <!-- ============ 脚本 ============ -->
+  <script src="js/lib/china-geo.js"></script>
+  <script src="js/lib/echarts.min.js"></script>
+  <script src="data/meta.js"></script>
+  <script src="data/universities.js"></script>
+  <script src="data/uni-211.js"></script>
+  <script src="data/uni-special.js"></script>
+  <script src="data/uni-extra.js"></script>
+  <script src="data/uni-extra2.js"></script>
+  <script src="data/logos.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
