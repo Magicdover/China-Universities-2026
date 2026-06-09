@@ -54,7 +54,7 @@
 
 ### 资料来源
 
-院校创立时间、所在地、主管部门、学科实力（双一流学科、教育部第四轮学科评估 A+/A/A- 学科）等基于公开资料整理；标签分类依据教育部「双一流」建设名单与中国社会主流认知。校徽取自开源项目「[中国大学矢量校徽合集](https://github.com/)」（设计师 pluwen，矢量 SVG）。
+院校创立时间、所在地、主管部门、学科实力（双一流学科、教育部第四轮学科评估 A+/A/A- 学科）等基于公开资料整理；标签分类依据教育部「双一流」建设名单与中国社会主流认知。校徽主要取自「[校徽大全](https://www.urongda.com/)」与「[中国大学矢量校徽合辑](https://github.com/soulteary/china-university-icon)」两个项目（详见文末致谢）。
 
 ---
 
@@ -165,6 +165,21 @@ node tools/smoke.js      # 桩掉 DOM 跑通页面初始化与渲染，捕捉运
 - **版本管理**：Git，源码托管于 GitHub → <https://github.com/Magicdover/China-Universities-2026>
 - **线上部署**：Vercel（纯静态、无构建步骤）→ <https://china-universities-2026.vercel.app>
 - **持续部署**：仓库已接入 Vercel，推送到 `main` 分支即自动部署到生产环境。
+
+---
+
+## 🙏 致谢
+
+本项目使用的院校校徽主要来自以下两个项目，在此特别致谢：
+
+- **校徽大全** —— <https://www.urongda.com/>
+- **中国大学矢量校徽合辑**（soulteary）—— <https://github.com/soulteary/china-university-icon>
+
+校徽版权归各高校所有，本项目仅将其用于信息展示与学习交流。
+
+## 📄 许可
+
+本项目（代码与整理的数据）**可自由使用、修改与分发**，无需署名、无附加限制。若对你有帮助，欢迎 Star 或基于它继续完善。
 
 ---
 
